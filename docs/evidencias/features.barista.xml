@@ -1,0 +1,405 @@
+<testsuite failures="0" name="features/barista.feature" skipped="0" tests="30" time="55.95188"><testcase classname="features.barista" name="En Espera - Iniciar Pedido - Moliendo" time="3.485477"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'En Espera' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Iniciar Pedido' } .................................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'En Espera', evento: 'Iniciar Pedido', estadoNuevo: 'Moliendo', valida: true, accion: null } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Moliendo' ............................. passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Moliendo - Terminar Molienda - Calentando Agua" time="2.68779"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Terminar Molienda' } ............................... passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Moliendo', evento: 'Terminar Molienda', estadoNuevo: 'Calentando Agua', valida: true, accion: null } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Calentando Agua' ...................... passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Calentando Agua - Alcanzar Temperatura - Sirviendo" time="2.644917"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Alcanzar Temperatura' } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Calentando Agua', evento: 'Alcanzar Temperatura', estadoNuevo: 'Sirviendo', valida: true, accion: null } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Sirviendo' ............................ passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Sirviendo - Terminar Llenado - En Espera" time="2.295105"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Terminar Llenado' } ................................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Sirviendo', evento: 'Terminar Llenado', estadoNuevo: 'En Espera', valida: true, accion: null } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'En Espera' ............................ passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Moliendo - Sin Ingredientes - Error de Insumos" time="1.469554"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Sin Ingredientes' } ................................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Moliendo', evento: 'Sin Ingredientes', estadoNuevo: 'Error de Insumos', valida: true, accion: 'Interrumpir flujo' } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Error de Insumos' ..................... passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Calentando Agua - Sin Ingredientes - Error de Insumos" time="1.678739"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Sin Ingredientes' } ................................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Calentando Agua', evento: 'Sin Ingredientes', estadoNuevo: 'Error de Insumos', valida: true, accion: 'Interrumpir flujo' } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Error de Insumos' ..................... passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Sirviendo - Sin Ingredientes - Error de Insumos" time="2.167762"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Sin Ingredientes' } ................................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Sirviendo', evento: 'Sin Ingredientes', estadoNuevo: 'Error de Insumos', valida: true, accion: 'Interrumpir flujo' } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Error de Insumos' ..................... passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Error de Insumos - Recargar y Reiniciar - En Espera" time="2.235008"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Error de Insumos' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Recargar y Reiniciar' } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Error de Insumos', evento: 'Recargar y Reiniciar', estadoNuevo: 'En Espera', valida: true, accion: 'Restaurar servicio' } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'En Espera' ............................ passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Terminar Molienda desde En Espera sin cambiar el estado" time="1.227265"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'En Espera' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Terminar Molienda' } ............................... passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'En Espera', evento: 'Terminar Molienda', estadoNuevo: 'En Espera', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'En Espera' ............................ passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Terminar Molienda', estadoNuevo: 'En Espera', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Alcanzar Temperatura desde En Espera sin cambiar el estado" time="1.266352"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'En Espera' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Alcanzar Temperatura' } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'En Espera', evento: 'Alcanzar Temperatura', estadoNuevo: 'En Espera', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'En Espera' ............................ passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Alcanzar Temperatura', estadoNuevo: 'En Espera', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Terminar Llenado desde En Espera sin cambiar el estado" time="1.245947"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'En Espera' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Terminar Llenado' } ................................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'En Espera', evento: 'Terminar Llenado', estadoNuevo: 'En Espera', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'En Espera' ............................ passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Terminar Llenado', estadoNuevo: 'En Espera', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Sin Ingredientes desde En Espera sin cambiar el estado" time="1.131324"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'En Espera' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Sin Ingredientes' } ................................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'En Espera', evento: 'Sin Ingredientes', estadoNuevo: 'En Espera', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'En Espera' ............................ passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Sin Ingredientes', estadoNuevo: 'En Espera', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Recargar y Reiniciar desde En Espera sin cambiar el estado" time="2.046294"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'En Espera' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Recargar y Reiniciar' } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'En Espera', evento: 'Recargar y Reiniciar', estadoNuevo: 'En Espera', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'En Espera' ............................ passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Recargar y Reiniciar', estadoNuevo: 'En Espera', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Iniciar Pedido desde Moliendo sin cambiar el estado" time="1.789173"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Iniciar Pedido' } .................................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Moliendo', evento: 'Iniciar Pedido', estadoNuevo: 'Moliendo', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Moliendo' ............................. passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Iniciar Pedido', estadoNuevo: 'Moliendo', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Alcanzar Temperatura desde Moliendo sin cambiar el estado" time="1.480915"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Alcanzar Temperatura' } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Moliendo', evento: 'Alcanzar Temperatura', estadoNuevo: 'Moliendo', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Moliendo' ............................. passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Alcanzar Temperatura', estadoNuevo: 'Moliendo', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Terminar Llenado desde Moliendo sin cambiar el estado" time="1.54692"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Terminar Llenado' } ................................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Moliendo', evento: 'Terminar Llenado', estadoNuevo: 'Moliendo', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Moliendo' ............................. passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Terminar Llenado', estadoNuevo: 'Moliendo', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Recargar y Reiniciar desde Moliendo sin cambiar el estado" time="1.384508"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Recargar y Reiniciar' } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Moliendo', evento: 'Recargar y Reiniciar', estadoNuevo: 'Moliendo', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Moliendo' ............................. passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Recargar y Reiniciar', estadoNuevo: 'Moliendo', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Iniciar Pedido desde Calentando Agua sin cambiar el estado" time="1.699565"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Iniciar Pedido' } .................................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Calentando Agua', evento: 'Iniciar Pedido', estadoNuevo: 'Calentando Agua', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Calentando Agua' ...................... passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Iniciar Pedido', estadoNuevo: 'Calentando Agua', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Terminar Molienda desde Calentando Agua sin cambiar el estado" time="2.169784"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Terminar Molienda' } ............................... passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Calentando Agua', evento: 'Terminar Molienda', estadoNuevo: 'Calentando Agua', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Calentando Agua' ...................... passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Terminar Molienda', estadoNuevo: 'Calentando Agua', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Terminar Llenado desde Calentando Agua sin cambiar el estado" time="2.0734"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Terminar Llenado' } ................................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Calentando Agua', evento: 'Terminar Llenado', estadoNuevo: 'Calentando Agua', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Calentando Agua' ...................... passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Terminar Llenado', estadoNuevo: 'Calentando Agua', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Recargar y Reiniciar desde Calentando Agua sin cambiar el estado" time="1.721506"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Recargar y Reiniciar' } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Calentando Agua', evento: 'Recargar y Reiniciar', estadoNuevo: 'Calentando Agua', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Calentando Agua' ...................... passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Recargar y Reiniciar', estadoNuevo: 'Calentando Agua', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Iniciar Pedido desde Sirviendo sin cambiar el estado" time="1.727402"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Iniciar Pedido' } .................................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Sirviendo', evento: 'Iniciar Pedido', estadoNuevo: 'Sirviendo', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Sirviendo' ............................ passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Iniciar Pedido', estadoNuevo: 'Sirviendo', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Terminar Molienda desde Sirviendo sin cambiar el estado" time="2.170877"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Terminar Molienda' } ............................... passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Sirviendo', evento: 'Terminar Molienda', estadoNuevo: 'Sirviendo', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Sirviendo' ............................ passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Terminar Molienda', estadoNuevo: 'Sirviendo', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Alcanzar Temperatura desde Sirviendo sin cambiar el estado" time="2.078772"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Alcanzar Temperatura' } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Sirviendo', evento: 'Alcanzar Temperatura', estadoNuevo: 'Sirviendo', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Sirviendo' ............................ passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Alcanzar Temperatura', estadoNuevo: 'Sirviendo', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Recargar y Reiniciar desde Sirviendo sin cambiar el estado" time="1.959257"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Recargar y Reiniciar' } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Sirviendo', evento: 'Recargar y Reiniciar', estadoNuevo: 'Sirviendo', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Sirviendo' ............................ passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Recargar y Reiniciar', estadoNuevo: 'Sirviendo', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Iniciar Pedido desde Error de Insumos sin cambiar el estado" time="1.542829"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Error de Insumos' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Iniciar Pedido' } .................................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Error de Insumos', evento: 'Iniciar Pedido', estadoNuevo: 'Error de Insumos', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Error de Insumos' ..................... passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Iniciar Pedido', estadoNuevo: 'Error de Insumos', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Terminar Molienda desde Error de Insumos sin cambiar el estado" time="1.889318"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Error de Insumos' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Terminar Molienda' } ............................... passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Error de Insumos', evento: 'Terminar Molienda', estadoNuevo: 'Error de Insumos', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Error de Insumos' ..................... passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Terminar Molienda', estadoNuevo: 'Error de Insumos', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Alcanzar Temperatura desde Error de Insumos sin cambiar el estado" time="1.633219"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Error de Insumos' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Alcanzar Temperatura' } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Error de Insumos', evento: 'Alcanzar Temperatura', estadoNuevo: 'Error de Insumos', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Error de Insumos' ..................... passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Alcanzar Temperatura', estadoNuevo: 'Error de Insumos', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Terminar Llenado desde Error de Insumos sin cambiar el estado" time="1.891312"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Error de Insumos' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Terminar Llenado' } ................................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Error de Insumos', evento: 'Terminar Llenado', estadoNuevo: 'Error de Insumos', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Error de Insumos' ..................... passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Terminar Llenado', estadoNuevo: 'Error de Insumos', valida: false } . passed
+</system-out></testcase>
+<testcase classname="features.barista" name="Rechazar Sin Ingredientes desde Error de Insumos sin cambiar el estado" time="1.611589"><system-out>* url baseUrl ............................................................. passed
+* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Error de Insumos' } . passed
+Given path 'barista-bot', 'evento' ........................................ passed
+And request { evento: 'Sin Ingredientes' } ................................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response contains { estadoAnterior: 'Error de Insumos', evento: 'Sin Ingredientes', estadoNuevo: 'Error de Insumos', valida: false, noDefinida: true } . passed
+Given path 'barista-bot', 'estado' ........................................ passed
+When method get ........................................................... passed
+Then status 200 ........................................................... passed
+And match response.estadoActual == 'Error de Insumos' ..................... passed
+* def ultimo = response.historial[response.historial.length - 1] .......... passed
+And match ultimo contains { evento: 'Sin Ingredientes', estadoNuevo: 'Error de Insumos', valida: false } . passed
+</system-out></testcase>
+</testsuite>

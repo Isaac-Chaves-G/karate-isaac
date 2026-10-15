@@ -1,0 +1,106 @@
+<testsuite failures="1" name="features/climatizacion.feature" skipped="0" tests="14" time="5.089492"><testcase classname="features.climatizacion" name="Temperatura alta=false, presencia=false, apertura prolongada=false" time="0.246195"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [false, false, false] } ............................ passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response == { valores: [false, false, false], accion: 'Mantener sistema apagado', reglaIndex: 3, noDefinida: false } . passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Temperatura alta=false, presencia=false, apertura prolongada=true" time="0.223804"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [false, false, true] } ............................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response == { valores: [false, false, true], accion: 'Apagar sistema de climatización y emitir alerta sonora', reglaIndex: 0, noDefinida: false } . passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Temperatura alta=false, presencia=true, apertura prolongada=false" time="0.275222"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [false, true, false] } ............................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response == { valores: [false, true, false], accion: 'Mantener sistema apagado', reglaIndex: 3, noDefinida: false } . passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Temperatura alta=false, presencia=true, apertura prolongada=true" time="0.308813"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [false, true, true] } .............................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response == { valores: [false, true, true], accion: 'Apagar sistema de climatización y emitir alerta sonora', reglaIndex: 0, noDefinida: false } . passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Temperatura alta=true, presencia=false, apertura prolongada=false" time="0.327098"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [true, false, false] } ............................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response == { valores: [true, false, false], accion: 'Mantener en modo de bajo consumo energético', reglaIndex: 2, noDefinida: false } . passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Temperatura alta=true, presencia=false, apertura prolongada=true" time="0.293251"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [true, false, true] } .............................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response == { valores: [true, false, true], accion: 'Apagar sistema de climatización y emitir alerta sonora', reglaIndex: 0, noDefinida: false } . passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Temperatura alta=true, presencia=true, apertura prolongada=false" time="0.270216"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [true, true, false] } .............................. passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response == { valores: [true, true, false], accion: 'Encender aire acondicionado en modo refrigeración', reglaIndex: 1, noDefinida: false } . passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Temperatura alta=true, presencia=true, apertura prolongada=true" time="0.20679"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [true, true, true] } ............................... passed
+When method post .......................................................... passed
+Then status 200 ........................................................... passed
+And match response == { valores: [true, true, true], accion: 'Apagar sistema de climatización y emitir alerta sonora', reglaIndex: 0, noDefinida: false } . passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Rechazar un contrato de entrada inválido - campo ausente" time="0.256505"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request {} ............................................................ passed
+When method post .......................................................... passed
+Then status 400 ........................................................... passed
+And match response.error == 'Se esperaban 3 valores booleanos' ............ passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Rechazar un contrato de entrada inválido - lista vacía" time="1.491477"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [] } ............................................... passed
+When method post .......................................................... passed
+Then status 400 ........................................................... passed
+And match response.error == 'Se esperaban 3 valores booleanos' ............ passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Rechazar un contrato de entrada inválido - faltan valores" time="0.275852"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [true, false] } .................................... passed
+When method post .......................................................... passed
+Then status 400 ........................................................... passed
+And match response.error == 'Se esperaban 3 valores booleanos' ............ passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Rechazar un contrato de entrada inválido - sobran valores" time="0.264309"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [true,true,true,true] } ............................ passed
+When method post .......................................................... passed
+Then status 400 ........................................................... passed
+And match response.error == 'Se esperaban 3 valores booleanos' ............ passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Rechazar un contrato de entrada inválido - valor nulo" time="0.300682"><system-out>* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: null } ............................................. passed
+When method post .......................................................... passed
+Then status 400 ........................................................... passed
+And match response.error == 'Se esperaban 3 valores booleanos' ............ passed
+</system-out></testcase>
+<testcase classname="features.climatizacion" name="Rechazar un contrato de entrada inválido - valor no booleano" time="0.349277"><failure message="status code was: 200, expected: 400, response time in milliseconds: 330, url: https://taller-de-tecnicas-de-prueba-de-caja.onrender.com/api/decision/climatizacion/evaluar, response: &#10;{&quot;valores&quot;:[true,&quot;si&quot;,false],&quot;accion&quot;:null,&quot;reglaIndex&quot;:null,&quot;noDefinida&quot;:true}&#10;classpath:features/climatizacion.feature:78">* url baseUrl ............................................................. passed
+Given path 'decision', 'climatizacion', 'evaluar' ......................... passed
+And request { valores: [true, 'si', false] } .............................. passed
+When method post .......................................................... passed
+Then status 400 ........................................................... failed
+
+Stack Trace:
+com.intuit.karate.KarateException: status code was: 200, expected: 400, response time in milliseconds: 330, url: https://taller-de-tecnicas-de-prueba-de-caja.onrender.com/api/decision/climatizacion/evaluar, response: 
+{"valores":[true,"si",false],"accion":null,"reglaIndex":null,"noDefinida":true}
+classpath:features/climatizacion.feature:78&#13;
+	at &lt;feature&gt;.: Then status 400 (classpath:features/climatizacion.feature:78:78)&#13;
+
+And match response.error == 'Se esperaban 3 valores booleanos' ............ skipped
+</failure></testcase>
+</testsuite>

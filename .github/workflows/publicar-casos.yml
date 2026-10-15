@@ -1,0 +1,38 @@
+name: Publicar casos Karate
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publicar-casos.yml', 'scripts/publish_cases.py']
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: publicar-casos-karate
+  cancel-in-progress: false
+jobs:
+  publicar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Crear issues y tags GH con números reales
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/publish_cases.py
+      - name: Guardar trazabilidad
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/issues docs/TRAZABILIDAD.md docs/testcases.json docs/github-mapping.json src/test/resources/features
+          if ! git diff --cached --quiet; then
+            git commit -m "Vincular los 22 casos Karate con sus issues"
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mapa-issues-karate
+          path: docs/github-mapping.json

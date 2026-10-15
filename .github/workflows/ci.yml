@@ -1,0 +1,99 @@
+name: Karate API
+run-name: Karate · ${{ github.event.issue.title || inputs.testTag || 'Suite completa' }}
+on:
+  push:
+    branches: [main, develop]
+    paths-ignore: ['docs/**', '*.md']
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+    inputs:
+      testTag:
+        description: 'Vacío = todos; TC01, GH-1, smoketest, barista o climatizacion (con o sin @)'
+        required: false
+        default: ''
+  issues:
+    types: [labeled]
+  workflow_run:
+    workflows: ['Publicar casos Karate']
+    types: [completed]
+permissions:
+  contents: read
+concurrency:
+  group: karate-api-compartida
+  cancel-in-progress: false
+jobs:
+  pruebas:
+    if: >-
+      (github.event_name != 'issues' || github.event.label.name == 'ejecutar-prueba') &&
+      (github.event_name != 'workflow_run' ||
+        (github.event.workflow_run.conclusion == 'success' &&
+         github.event.workflow_run.head_branch == 'main' &&
+         github.event.workflow_run.head_repository.full_name == github.repository))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Resolver y validar tag
+        id: seleccion
+        shell: python
+        env:
+          REQUESTED_TAG: ${{ inputs.testTag }}
+        run: |
+          import json, os, re, sys
+          sys.path.insert(0, 'scripts')
+          from catalog import cases
+          with open(os.environ['GITHUB_EVENT_PATH'], encoding='utf-8') as f:
+              event = json.load(f)
+          tag = os.environ.get('REQUESTED_TAG', '').strip().lstrip('@')
+          if os.environ['GITHUB_EVENT_NAME'] == 'issues':
+              tag = 'GH-' + str(event['issue']['number'])
+          if tag and not re.fullmatch(r'(TC\d{2}|GH-[1-9]\d*|smoketest|api|barista|climatizacion)', tag):
+              raise SystemExit('Tag inválido')
+          tag = '@' + tag if tag else ''
+          if tag and tag not in ['@api', '@barista', '@climatizacion'] and not any(tag in c['tags'] for c in cases()):
+              raise SystemExit('El tag no está vinculado a ningún escenario')
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as f:
+              f.write('tag=' + tag + '\n')
+      - name: Ejecutar Karate
+        env:
+          TEST_TAG: ${{ steps.seleccion.outputs.tag }}
+        run: |
+          if [ -n "$TEST_TAG" ]; then
+            bash ./gradlew clean test "-Dkarate.options=--tags $TEST_TAG" --console=plain
+          else
+            bash ./gradlew clean test --console=plain
+          fi
+      - name: Resumir resultados y actualizar issues
+        if: always() && steps.seleccion.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TEST_TAG: ${{ steps.seleccion.outputs.tag }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = 'pull_request' ]; then
+            python scripts/report_results.py
+          else
+            python scripts/report_results.py --publish
+          fi
+      - name: Conservar reportes aun si hay fallos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: karate-reports-${{ github.run_number }}
+          retention-days: 14
+          path: |
+            target/karate-reports/
+            target/resultados.json
+            build/reports/tests/
+            build/test-results/

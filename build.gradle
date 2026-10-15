@@ -1,0 +1,22 @@
+plugins { id 'java' }
+group = 'com.icesi'
+version = '1.0'
+repositories { mavenCentral() }
+dependencies {
+    testImplementation 'com.intuit.karate:karate-junit5:1.4.1'
+    testImplementation 'ch.qos.logback:logback-classic:1.5.6'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.9.3'
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 17
+}
+test {
+    useJUnitPlatform()
+    maxParallelForks = 1
+    ['karate.options', 'api.baseUrl'].each { key ->
+        if (System.getProperty(key)) systemProperty key, System.getProperty(key)
+    }
+    testLogging { events 'passed', 'failed'; exceptionFormat 'full' }
+}
+clean { delete 'target' }

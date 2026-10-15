@@ -1,0 +1,314 @@
+[
+  {
+    "id": "TC01",
+    "title": "En Espera - Iniciar Pedido - Moliendo",
+    "tags": [
+      "@TC01",
+      "@REQ-BAR-01",
+      "@positivo",
+      "@smoketest"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'En Espera' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: 'Iniciar Pedido' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'En Espera', evento: 'Iniciar Pedido', estadoNuevo: 'Moliendo', valida: true, accion: null }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'Moliendo'",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC02",
+    "title": "Moliendo - Terminar Molienda - Calentando Agua",
+    "tags": [
+      "@TC02",
+      "@REQ-BAR-02",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: 'Terminar Molienda' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Moliendo', evento: 'Terminar Molienda', estadoNuevo: 'Calentando Agua', valida: true, accion: null }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'Calentando Agua'",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC03",
+    "title": "Calentando Agua - Alcanzar Temperatura - Sirviendo",
+    "tags": [
+      "@TC03",
+      "@REQ-BAR-03",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: 'Alcanzar Temperatura' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Calentando Agua', evento: 'Alcanzar Temperatura', estadoNuevo: 'Sirviendo', valida: true, accion: null }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'Sirviendo'",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC04",
+    "title": "Sirviendo - Terminar Llenado - En Espera",
+    "tags": [
+      "@TC04",
+      "@REQ-BAR-04",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: 'Terminar Llenado' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Sirviendo', evento: 'Terminar Llenado', estadoNuevo: 'En Espera', valida: true, accion: null }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'En Espera'",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC05",
+    "title": "Moliendo - Sin Ingredientes - Error de Insumos",
+    "tags": [
+      "@TC05",
+      "@REQ-BAR-05",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: 'Sin Ingredientes' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Moliendo', evento: 'Sin Ingredientes', estadoNuevo: 'Error de Insumos', valida: true, accion: 'Interrumpir flujo' }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'Error de Insumos'",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC06",
+    "title": "Calentando Agua - Sin Ingredientes - Error de Insumos",
+    "tags": [
+      "@TC06",
+      "@REQ-BAR-05",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: 'Sin Ingredientes' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Calentando Agua', evento: 'Sin Ingredientes', estadoNuevo: 'Error de Insumos', valida: true, accion: 'Interrumpir flujo' }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'Error de Insumos'",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC07",
+    "title": "Sirviendo - Sin Ingredientes - Error de Insumos",
+    "tags": [
+      "@TC07",
+      "@REQ-BAR-05",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: 'Sin Ingredientes' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Sirviendo', evento: 'Sin Ingredientes', estadoNuevo: 'Error de Insumos', valida: true, accion: 'Interrumpir flujo' }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'Error de Insumos'",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC08",
+    "title": "Error de Insumos - Recargar y Reiniciar - En Espera",
+    "tags": [
+      "@TC08",
+      "@REQ-BAR-06",
+      "@positivo",
+      "@smoketest"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Error de Insumos' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: 'Recargar y Reiniciar' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Error de Insumos', evento: 'Recargar y Reiniciar', estadoNuevo: 'En Espera', valida: true, accion: 'Restaurar servicio' }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'En Espera'",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC09",
+    "title": "Rechazar <evento> desde En Espera sin cambiar el estado",
+    "tags": [
+      "@TC09",
+      "@REQ-BAR-07",
+      "@negativo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'En Espera' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: '<evento>' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'En Espera', evento: '<evento>', estadoNuevo: 'En Espera', valida: false, noDefinida: true }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'En Espera'\n    * def ultimo = response.historial[response.historial.length - 1]\n    And match ultimo contains { evento: '<evento>', estadoNuevo: 'En Espera', valida: false }\n\n    Examples:\n      | evento |\n      | Terminar Molienda |\n      | Alcanzar Temperatura |\n      | Terminar Llenado |\n      | Sin Ingredientes |\n      | Recargar y Reiniciar |",
+    "kind": "Scenario Outline",
+    "issue": null
+  },
+  {
+    "id": "TC10",
+    "title": "Rechazar <evento> desde Moliendo sin cambiar el estado",
+    "tags": [
+      "@TC10",
+      "@REQ-BAR-07",
+      "@negativo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: '<evento>' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Moliendo', evento: '<evento>', estadoNuevo: 'Moliendo', valida: false, noDefinida: true }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'Moliendo'\n    * def ultimo = response.historial[response.historial.length - 1]\n    And match ultimo contains { evento: '<evento>', estadoNuevo: 'Moliendo', valida: false }\n\n    Examples:\n      | evento |\n      | Iniciar Pedido |\n      | Alcanzar Temperatura |\n      | Terminar Llenado |\n      | Recargar y Reiniciar |",
+    "kind": "Scenario Outline",
+    "issue": null
+  },
+  {
+    "id": "TC11",
+    "title": "Rechazar <evento> desde Calentando Agua sin cambiar el estado",
+    "tags": [
+      "@TC11",
+      "@REQ-BAR-07",
+      "@negativo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: '<evento>' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Calentando Agua', evento: '<evento>', estadoNuevo: 'Calentando Agua', valida: false, noDefinida: true }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'Calentando Agua'\n    * def ultimo = response.historial[response.historial.length - 1]\n    And match ultimo contains { evento: '<evento>', estadoNuevo: 'Calentando Agua', valida: false }\n\n    Examples:\n      | evento |\n      | Iniciar Pedido |\n      | Terminar Molienda |\n      | Terminar Llenado |\n      | Recargar y Reiniciar |",
+    "kind": "Scenario Outline",
+    "issue": null
+  },
+  {
+    "id": "TC12",
+    "title": "Rechazar <evento> desde Sirviendo sin cambiar el estado",
+    "tags": [
+      "@TC12",
+      "@REQ-BAR-07",
+      "@negativo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: '<evento>' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Sirviendo', evento: '<evento>', estadoNuevo: 'Sirviendo', valida: false, noDefinida: true }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'Sirviendo'\n    * def ultimo = response.historial[response.historial.length - 1]\n    And match ultimo contains { evento: '<evento>', estadoNuevo: 'Sirviendo', valida: false }\n\n    Examples:\n      | evento |\n      | Iniciar Pedido |\n      | Terminar Molienda |\n      | Alcanzar Temperatura |\n      | Recargar y Reiniciar |",
+    "kind": "Scenario Outline",
+    "issue": null
+  },
+  {
+    "id": "TC13",
+    "title": "Rechazar <evento> desde Error de Insumos sin cambiar el estado",
+    "tags": [
+      "@TC13",
+      "@REQ-BAR-07",
+      "@negativo"
+    ],
+    "feature": "src/test/resources/features/barista.feature",
+    "module": "barista",
+    "steps": "* def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Error de Insumos' }\n    Given path 'barista-bot', 'evento'\n    And request { evento: '<evento>' }\n    When method post\n    Then status 200\n    And match response contains { estadoAnterior: 'Error de Insumos', evento: '<evento>', estadoNuevo: 'Error de Insumos', valida: false, noDefinida: true }\n    Given path 'barista-bot', 'estado'\n    When method get\n    Then status 200\n    And match response.estadoActual == 'Error de Insumos'\n    * def ultimo = response.historial[response.historial.length - 1]\n    And match ultimo contains { evento: '<evento>', estadoNuevo: 'Error de Insumos', valida: false }\n\n    Examples:\n      | evento |\n      | Iniciar Pedido |\n      | Terminar Molienda |\n      | Alcanzar Temperatura |\n      | Terminar Llenado |\n      | Sin Ingredientes |",
+    "kind": "Scenario Outline",
+    "issue": null
+  },
+  {
+    "id": "TC14",
+    "title": "Temperatura alta=false, presencia=false, apertura prolongada=false",
+    "tags": [
+      "@TC14",
+      "@REQ-CLI-04",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/climatizacion.feature",
+    "module": "climatizacion",
+    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request { valores: [false, false, false] }\n    When method post\n    Then status 200\n    And match response == { valores: [false, false, false], accion: 'Mantener sistema apagado', reglaIndex: 3, noDefinida: false }",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC15",
+    "title": "Temperatura alta=false, presencia=false, apertura prolongada=true",
+    "tags": [
+      "@TC15",
+      "@REQ-CLI-01",
+      "@positivo",
+      "@smoketest"
+    ],
+    "feature": "src/test/resources/features/climatizacion.feature",
+    "module": "climatizacion",
+    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request { valores: [false, false, true] }\n    When method post\n    Then status 200\n    And match response == { valores: [false, false, true], accion: 'Apagar sistema de climatización y emitir alerta sonora', reglaIndex: 0, noDefinida: false }",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC16",
+    "title": "Temperatura alta=false, presencia=true, apertura prolongada=false",
+    "tags": [
+      "@TC16",
+      "@REQ-CLI-04",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/climatizacion.feature",
+    "module": "climatizacion",
+    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request { valores: [false, true, false] }\n    When method post\n    Then status 200\n    And match response == { valores: [false, true, false], accion: 'Mantener sistema apagado', reglaIndex: 3, noDefinida: false }",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC17",
+    "title": "Temperatura alta=false, presencia=true, apertura prolongada=true",
+    "tags": [
+      "@TC17",
+      "@REQ-CLI-01",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/climatizacion.feature",
+    "module": "climatizacion",
+    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request { valores: [false, true, true] }\n    When method post\n    Then status 200\n    And match response == { valores: [false, true, true], accion: 'Apagar sistema de climatización y emitir alerta sonora', reglaIndex: 0, noDefinida: false }",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC18",
+    "title": "Temperatura alta=true, presencia=false, apertura prolongada=false",
+    "tags": [
+      "@TC18",
+      "@REQ-CLI-03",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/climatizacion.feature",
+    "module": "climatizacion",
+    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request { valores: [true, false, false] }\n    When method post\n    Then status 200\n    And match response == { valores: [true, false, false], accion: 'Mantener en modo de bajo consumo energético', reglaIndex: 2, noDefinida: false }",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC19",
+    "title": "Temperatura alta=true, presencia=false, apertura prolongada=true",
+    "tags": [
+      "@TC19",
+      "@REQ-CLI-01",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/climatizacion.feature",
+    "module": "climatizacion",
+    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request { valores: [true, false, true] }\n    When method post\n    Then status 200\n    And match response == { valores: [true, false, true], accion: 'Apagar sistema de climatización y emitir alerta sonora', reglaIndex: 0, noDefinida: false }",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC20",
+    "title": "Temperatura alta=true, presencia=true, apertura prolongada=false",
+    "tags": [
+      "@TC20",
+      "@REQ-CLI-02",
+      "@positivo",
+      "@smoketest"
+    ],
+    "feature": "src/test/resources/features/climatizacion.feature",
+    "module": "climatizacion",
+    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request { valores: [true, true, false] }\n    When method post\n    Then status 200\n    And match response == { valores: [true, true, false], accion: 'Encender aire acondicionado en modo refrigeración', reglaIndex: 1, noDefinida: false }",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC21",
+    "title": "Temperatura alta=true, presencia=true, apertura prolongada=true",
+    "tags": [
+      "@TC21",
+      "@REQ-CLI-01",
+      "@positivo"
+    ],
+    "feature": "src/test/resources/features/climatizacion.feature",
+    "module": "climatizacion",
+    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request { valores: [true, true, true] }\n    When method post\n    Then status 200\n    And match response == { valores: [true, true, true], accion: 'Apagar sistema de climatización y emitir alerta sonora', reglaIndex: 0, noDefinida: false }",
+    "kind": "Scenario",
+    "issue": null
+  },
+  {
+    "id": "TC22",
+    "title": "Rechazar un contrato de entrada inválido - <caso>",
+    "tags": [
+      "@TC22",
+      "@REQ-CLI-05",
+      "@negativo"
+    ],
+    "feature": "src/test/resources/features/climatizacion.feature",
+    "module": "climatizacion",
+    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request <payload>\n    When method post\n    Then status 400\n    And match response.error == 'Se esperaban 3 valores booleanos'\n\n    Examples:\n      | caso             | payload                           |\n      | campo ausente    | {}                                |\n      | lista vacía      | { valores: [] }                   |\n      | faltan valores   | { valores: [true, false] }        |\n      | sobran valores   | { valores: [true,true,true,true] } |\n      | valor nulo       | { valores: null }                 |\n      | valor no booleano | { valores: [true, 'si', false] }  |",
+    "kind": "Scenario Outline",
+    "issue": null
+  }
+]

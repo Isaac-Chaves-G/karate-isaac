@@ -1,0 +1,1 @@
+{"estadoActual":"En Espera","historial":[],"maquina":{"nombre":"Robot Cafetero Automatizado (Barista Bot)","estados":["En Espera","Moliendo","Calentando Agua","Sirviendo","Error de Insumos"],"eventos":["Iniciar Pedido","Terminar Molienda","Alcanzar Temperatura","Terminar Llenado","Sin Ingredientes","Recargar y Reiniciar"],"guardias":{}}}

@@ -1,0 +1,23 @@
+{
+  "status": 200,
+  "method": "POST",
+  "response": {
+    "valores": [
+      true,
+      "si",
+      false
+    ],
+    "accion": null,
+    "reglaIndex": null,
+    "noDefinida": true
+  },
+  "request": {
+    "valores": [
+      true,
+      "si",
+      false
+    ]
+  },
+  "endpoint": "/api/decision/climatizacion/evaluar",
+  "fechaUtc": "2026-10-15T22:00:58.6812891Z"
+}
