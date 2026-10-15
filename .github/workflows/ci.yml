@@ -19,9 +19,6 @@ on:
     types: [completed]
 permissions:
   contents: read
-concurrency:
-  group: karate-api-compartida
-  cancel-in-progress: false
 jobs:
   pruebas:
     if: >-
@@ -32,6 +29,9 @@ jobs:
          github.event.workflow_run.head_repository.full_name == github.repository))
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    concurrency:
+      group: karate-api-compartida
+      cancel-in-progress: false
     permissions:
       contents: read
       issues: write

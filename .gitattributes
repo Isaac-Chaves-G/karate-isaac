@@ -5,3 +5,5 @@
 gradlew text eol=lf
 *.bat text eol=crlf
 *.jar binary
+docs/evidencias/*.xml -text -diff
+docs/materiales/ci-profesora.yml -text -diff
