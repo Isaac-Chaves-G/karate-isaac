@@ -5,7 +5,7 @@ Feature: Transiciones de Barista Bot
   Background:
     * url baseUrl
 
-  @TC01 @REQ-BAR-01 @positivo @smoketest
+  @TC01 @REQ-BAR-01 @positivo @smoketest @GH-1
   Scenario: En Espera - Iniciar Pedido - Moliendo
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'En Espera' }
     Given path 'barista-bot', 'evento'
@@ -18,7 +18,7 @@ Feature: Transiciones de Barista Bot
     Then status 200
     And match response.estadoActual == 'Moliendo'
 
-  @TC02 @REQ-BAR-02 @positivo
+  @TC02 @REQ-BAR-02 @positivo @GH-2
   Scenario: Moliendo - Terminar Molienda - Calentando Agua
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' }
     Given path 'barista-bot', 'evento'
@@ -31,7 +31,7 @@ Feature: Transiciones de Barista Bot
     Then status 200
     And match response.estadoActual == 'Calentando Agua'
 
-  @TC03 @REQ-BAR-03 @positivo
+  @TC03 @REQ-BAR-03 @positivo @GH-3
   Scenario: Calentando Agua - Alcanzar Temperatura - Sirviendo
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' }
     Given path 'barista-bot', 'evento'
@@ -44,7 +44,7 @@ Feature: Transiciones de Barista Bot
     Then status 200
     And match response.estadoActual == 'Sirviendo'
 
-  @TC04 @REQ-BAR-04 @positivo
+  @TC04 @REQ-BAR-04 @positivo @GH-4
   Scenario: Sirviendo - Terminar Llenado - En Espera
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' }
     Given path 'barista-bot', 'evento'
@@ -57,7 +57,7 @@ Feature: Transiciones de Barista Bot
     Then status 200
     And match response.estadoActual == 'En Espera'
 
-  @TC05 @REQ-BAR-05 @positivo
+  @TC05 @REQ-BAR-05 @positivo @GH-5
   Scenario: Moliendo - Sin Ingredientes - Error de Insumos
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' }
     Given path 'barista-bot', 'evento'
@@ -70,7 +70,7 @@ Feature: Transiciones de Barista Bot
     Then status 200
     And match response.estadoActual == 'Error de Insumos'
 
-  @TC06 @REQ-BAR-05 @positivo
+  @TC06 @REQ-BAR-05 @positivo @GH-6
   Scenario: Calentando Agua - Sin Ingredientes - Error de Insumos
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' }
     Given path 'barista-bot', 'evento'
@@ -83,7 +83,7 @@ Feature: Transiciones de Barista Bot
     Then status 200
     And match response.estadoActual == 'Error de Insumos'
 
-  @TC07 @REQ-BAR-05 @positivo
+  @TC07 @REQ-BAR-05 @positivo @GH-7
   Scenario: Sirviendo - Sin Ingredientes - Error de Insumos
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' }
     Given path 'barista-bot', 'evento'
@@ -96,7 +96,7 @@ Feature: Transiciones de Barista Bot
     Then status 200
     And match response.estadoActual == 'Error de Insumos'
 
-  @TC08 @REQ-BAR-06 @positivo @smoketest
+  @TC08 @REQ-BAR-06 @positivo @smoketest @GH-8
   Scenario: Error de Insumos - Recargar y Reiniciar - En Espera
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Error de Insumos' }
     Given path 'barista-bot', 'evento'
@@ -109,7 +109,7 @@ Feature: Transiciones de Barista Bot
     Then status 200
     And match response.estadoActual == 'En Espera'
 
-  @TC09 @REQ-BAR-07 @negativo
+  @TC09 @REQ-BAR-07 @negativo @GH-9
   Scenario Outline: Rechazar <evento> desde En Espera sin cambiar el estado
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'En Espera' }
     Given path 'barista-bot', 'evento'
@@ -132,7 +132,7 @@ Feature: Transiciones de Barista Bot
       | Sin Ingredientes |
       | Recargar y Reiniciar |
 
-  @TC10 @REQ-BAR-07 @negativo
+  @TC10 @REQ-BAR-07 @negativo @GH-10
   Scenario Outline: Rechazar <evento> desde Moliendo sin cambiar el estado
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Moliendo' }
     Given path 'barista-bot', 'evento'
@@ -154,7 +154,7 @@ Feature: Transiciones de Barista Bot
       | Terminar Llenado |
       | Recargar y Reiniciar |
 
-  @TC11 @REQ-BAR-07 @negativo
+  @TC11 @REQ-BAR-07 @negativo @GH-11
   Scenario Outline: Rechazar <evento> desde Calentando Agua sin cambiar el estado
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Calentando Agua' }
     Given path 'barista-bot', 'evento'
@@ -176,7 +176,7 @@ Feature: Transiciones de Barista Bot
       | Terminar Llenado |
       | Recargar y Reiniciar |
 
-  @TC12 @REQ-BAR-07 @negativo
+  @TC12 @REQ-BAR-07 @negativo @GH-12
   Scenario Outline: Rechazar <evento> desde Sirviendo sin cambiar el estado
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Sirviendo' }
     Given path 'barista-bot', 'evento'
@@ -198,7 +198,7 @@ Feature: Transiciones de Barista Bot
       | Alcanzar Temperatura |
       | Recargar y Reiniciar |
 
-  @TC13 @REQ-BAR-07 @negativo
+  @TC13 @REQ-BAR-07 @negativo @GH-13
   Scenario Outline: Rechazar <evento> desde Error de Insumos sin cambiar el estado
     * def setup = call read('classpath:helpers/barista-state.feature') { estado: 'Error de Insumos' }
     Given path 'barista-bot', 'evento'

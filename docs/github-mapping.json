@@ -1,0 +1,115 @@
+{
+  "repository": "Isaac-Chaves-G/karate-isaac",
+  "cases": {
+    "TC01": {
+      "number": 1,
+      "title": "[TC01] En Espera - Iniciar Pedido - Moliendo",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/1"
+    },
+    "TC02": {
+      "number": 2,
+      "title": "[TC02] Moliendo - Terminar Molienda - Calentando Agua",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/2"
+    },
+    "TC03": {
+      "number": 3,
+      "title": "[TC03] Calentando Agua - Alcanzar Temperatura - Sirviendo",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/3"
+    },
+    "TC04": {
+      "number": 4,
+      "title": "[TC04] Sirviendo - Terminar Llenado - En Espera",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/4"
+    },
+    "TC05": {
+      "number": 5,
+      "title": "[TC05] Moliendo - Sin Ingredientes - Error de Insumos",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/5"
+    },
+    "TC06": {
+      "number": 6,
+      "title": "[TC06] Calentando Agua - Sin Ingredientes - Error de Insumos",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/6"
+    },
+    "TC07": {
+      "number": 7,
+      "title": "[TC07] Sirviendo - Sin Ingredientes - Error de Insumos",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/7"
+    },
+    "TC08": {
+      "number": 8,
+      "title": "[TC08] Error de Insumos - Recargar y Reiniciar - En Espera",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/8"
+    },
+    "TC09": {
+      "number": 9,
+      "title": "[TC09] Rechazar <evento> desde En Espera sin cambiar el estado",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/9"
+    },
+    "TC10": {
+      "number": 10,
+      "title": "[TC10] Rechazar <evento> desde Moliendo sin cambiar el estado",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/10"
+    },
+    "TC11": {
+      "number": 11,
+      "title": "[TC11] Rechazar <evento> desde Calentando Agua sin cambiar el estado",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/11"
+    },
+    "TC12": {
+      "number": 12,
+      "title": "[TC12] Rechazar <evento> desde Sirviendo sin cambiar el estado",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/12"
+    },
+    "TC13": {
+      "number": 13,
+      "title": "[TC13] Rechazar <evento> desde Error de Insumos sin cambiar el estado",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/13"
+    },
+    "TC14": {
+      "number": 14,
+      "title": "[TC14] Temperatura alta=false, presencia=false, apertura prolongada=false",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/14"
+    },
+    "TC15": {
+      "number": 15,
+      "title": "[TC15] Temperatura alta=false, presencia=false, apertura prolongada=true",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/15"
+    },
+    "TC16": {
+      "number": 16,
+      "title": "[TC16] Temperatura alta=false, presencia=true, apertura prolongada=false",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/16"
+    },
+    "TC17": {
+      "number": 17,
+      "title": "[TC17] Temperatura alta=false, presencia=true, apertura prolongada=true",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/17"
+    },
+    "TC18": {
+      "number": 18,
+      "title": "[TC18] Temperatura alta=true, presencia=false, apertura prolongada=false",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/18"
+    },
+    "TC19": {
+      "number": 19,
+      "title": "[TC19] Temperatura alta=true, presencia=false, apertura prolongada=true",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/19"
+    },
+    "TC20": {
+      "number": 20,
+      "title": "[TC20] Temperatura alta=true, presencia=true, apertura prolongada=false",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/20"
+    },
+    "TC21": {
+      "number": 21,
+      "title": "[TC21] Temperatura alta=true, presencia=true, apertura prolongada=true",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/21"
+    },
+    "TC22": {
+      "number": 22,
+      "title": "[TC22] Rechazar un contrato de entrada inválido - <caso>",
+      "url": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/22"
+    }
+  }
+}
