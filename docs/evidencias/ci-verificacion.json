@@ -1,0 +1,170 @@
+{
+  "verifiedUtc": "2026-10-15T22:06:19.3758618Z",
+  "artifacts": [
+    {
+      "name": "karate-reports-2",
+      "size_in_bytes": 399291,
+      "expired": false
+    }
+  ],
+  "run": "https://github.com/Isaac-Chaves-G/karate-isaac/actions/runs/38814432411",
+  "passed": 43.0,
+  "caseCount": 22,
+  "cases": [
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC01",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/1#issuecomment-6203223443",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC02",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/2#issuecomment-6203224046",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC03",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/3#issuecomment-6203224658",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC04",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/4#issuecomment-6203225275",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC05",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/5#issuecomment-6203225810",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC06",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/6#issuecomment-6203226382",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC07",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/7#issuecomment-6203227000",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC08",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/8#issuecomment-6203227501",
+      "failed": 0
+    },
+    {
+      "passed": 5,
+      "state": "PASSED",
+      "case": "TC09",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/9#issuecomment-6203228085",
+      "failed": 0
+    },
+    {
+      "passed": 4,
+      "state": "PASSED",
+      "case": "TC10",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/10#issuecomment-6203228602",
+      "failed": 0
+    },
+    {
+      "passed": 4,
+      "state": "PASSED",
+      "case": "TC11",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/11#issuecomment-6203229228",
+      "failed": 0
+    },
+    {
+      "passed": 4,
+      "state": "PASSED",
+      "case": "TC12",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/12#issuecomment-6203229802",
+      "failed": 0
+    },
+    {
+      "passed": 5,
+      "state": "PASSED",
+      "case": "TC13",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/13#issuecomment-6203230382",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC14",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/14#issuecomment-6203231071",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC15",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/15#issuecomment-6203231758",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC16",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/16#issuecomment-6203232617",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC17",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/17#issuecomment-6203233308",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC18",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/18#issuecomment-6203233966",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC19",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/19#issuecomment-6203235351",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC20",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/20#issuecomment-6203236023",
+      "failed": 0
+    },
+    {
+      "passed": 1,
+      "state": "PASSED",
+      "case": "TC21",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/21#issuecomment-6203236659",
+      "failed": 0
+    },
+    {
+      "passed": 5,
+      "state": "FAILED",
+      "case": "TC22",
+      "comment": "https://github.com/Isaac-Chaves-G/karate-isaac/issues/22#issuecomment-6203237316",
+      "failed": 1
+    }
+  ],
+  "failed": 1.0
+}
