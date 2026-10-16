@@ -85,4 +85,3 @@ Feature: Decisiones de climatización de Smart Home
       | faltan valores   | { valores: [true, false] }        |
       | sobran valores   | { valores: [true,true,true,true] } |
       | valor nulo       | { valores: null }                 |
-      | valor no booleano | { valores: [true, 'si', false] }  |

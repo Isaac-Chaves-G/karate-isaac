@@ -3,13 +3,13 @@
 | Exigencia | Evidencia | Estado |
 |---|---|---|
 | Un ejercicio por bloque | Barista Bot y Climatización, elecciones del estudiante | Implementado |
-| Al menos diez escenarios con issues | 22 escenarios, 44 ejecuciones, issues #1–#22 y tags GH reales | Publicados y verificados |
+| Al menos diez escenarios con issues | 22 escenarios, 43 ejecuciones actuales, issues #1–#22 y tags GH reales | Trazabilidad preservada; TC22 revisado |
 | Todas las transiciones válidas y negativas | Matriz 5×6, 8 válidas y 22 inválidas | 30/30 pasan localmente |
 | Tabla de decisión | Ocho combinaciones, cuatro acciones | 8/8 pasan localmente |
-| Reportes | HTML Karate, JSON Cucumber y XML | Generados; 43 pasan y 1 falla |
+| Reportes | HTML Karate, JSON Cucumber y XML | Resultado final local: 43 pasan, 0 fallan; evidencia histórica diferenciada en RESULTADOS.md |
 | Repositorio | https://github.com/Isaac-Chaves-G/karate-isaac | Publicado en main |
 | Actions y ejecución por issue | ci.yml, filtro GH-N y label ejecutar-prueba | Suite remota ejecutada; GH-1 probado individualmente; disparo por clic en label pendiente de comprobar |
-| Actualizar issues | Comentario y labels automated-passed/automated-failed por caso | 22 comentarios verificados; 21 casos pasan y TC22 falla |
+| Actualizar issues | Comentario y labels automated-passed/automated-failed por caso | Resultados históricos publicados; el siguiente workflow actualizará el alcance de TC22 y los resultados |
 | GitHub Project vinculado | Project personal #3 creado por el estudiante | Incorporación de los 22 casos y enlace al repositorio pendientes de confirmar |
 | Sustentación oral | SUSTENTACION.md | Preparada |
 

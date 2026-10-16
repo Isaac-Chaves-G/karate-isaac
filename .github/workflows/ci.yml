@@ -3,13 +3,19 @@ run-name: Karate · ${{ github.event.issue.title || inputs.testTag || 'Suite com
 on:
   push:
     branches: [main, develop]
-    paths-ignore: ['docs/**', '*.md']
+    paths-ignore: ['docs/**', '*.md', '.github/workflows/audit.yml']
   pull_request:
     branches: [main, develop]
   workflow_dispatch:
     inputs:
       testTag:
-        description: 'Vacío = todos; TC01, GH-1, smoketest, barista o climatizacion (con o sin @)'
+        description: 'Vacío/todos = suite; TC01, GH-1, smoketest, barista o climatizacion (con/sin @; mayúsculas/minúsculas)'
+        required: false
+        default: ''
+  workflow_call:
+    inputs:
+      testTag:
+        type: string
         required: false
         default: ''
   issues:
@@ -36,35 +42,21 @@ jobs:
       contents: read
       issues: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '21'
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
+      - name: Verificar filtros de ejecución
+        run: python -m unittest discover -s scripts -p "test_*.py" -v
       - name: Resolver y validar tag
         id: seleccion
-        shell: python
         env:
           REQUESTED_TAG: ${{ inputs.testTag }}
-        run: |
-          import json, os, re, sys
-          sys.path.insert(0, 'scripts')
-          from catalog import cases
-          with open(os.environ['GITHUB_EVENT_PATH'], encoding='utf-8') as f:
-              event = json.load(f)
-          tag = os.environ.get('REQUESTED_TAG', '').strip().lstrip('@')
-          if os.environ['GITHUB_EVENT_NAME'] == 'issues':
-              tag = 'GH-' + str(event['issue']['number'])
-          if tag and not re.fullmatch(r'(TC\d{2}|GH-[1-9]\d*|smoketest|api|barista|climatizacion)', tag):
-              raise SystemExit('Tag inválido')
-          tag = '@' + tag if tag else ''
-          if tag and tag not in ['@api', '@barista', '@climatizacion'] and not any(tag in c['tags'] for c in cases()):
-              raise SystemExit('El tag no está vinculado a ningún escenario')
-          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as f:
-              f.write('tag=' + tag + '\n')
+        run: python scripts/select_tag.py
       - name: Ejecutar Karate
         env:
           TEST_TAG: ${{ steps.seleccion.outputs.tag }}
@@ -88,7 +80,7 @@ jobs:
           fi
       - name: Conservar reportes aun si hay fallos
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: karate-reports-${{ github.run_number }}
           retention-days: 14

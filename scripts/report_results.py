@@ -49,8 +49,29 @@ def main():
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(summary, ensure_ascii=False, indent=2))
+    if os.environ.get('GITHUB_ACTIONS') == 'true':
+        print(f"::notice title=Resultados Karate::{summary['passed']} correctas; "
+              f"{summary['failed']} fallidas; {len(summary['missing'])} casos sin evidencia")
+        for case_id, result in sorted(results.items()):
+            if result['failed']:
+                print(f"::warning title={case_id}::{result['passed']} correctas y {result['failed']} fallidas; revisar reporte de este caso")
+    if os.environ.get('GITHUB_STEP_SUMMARY'):
+        lines = ['## Resultados Karate', '',
+                 f"Filtro: `{tag or 'suite completa'}`. "
+                 f"**{summary['passed']} correctas, {summary['failed']} fallidas**. "
+                 f"Casos sin evidencia: {len(summary['missing'])}.", '',
+                 '| Caso | Correctas | Fallidas |', '|---|---:|---:|']
+        for case in selected:
+            result = results.get(case['id'])
+            lines.append(f"| {case['id']} | {result['passed'] if result else 'sin evidencia'} | {result['failed'] if result else '—'} |")
+        lines.extend(['', 'Un caso negativo pasa cuando el sistema rechaza correctamente la entrada. '
+                      'Un fallo de aserción requiere revisar el reporte antes de atribuirlo a un defecto.'])
+        with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as output:
+            output.write('\n'.join(lines) + '\n')
     mapping_path = ROOT / 'docs/github-mapping.json'
     if not args.publish or not mapping_path.exists():
+        if summary['missing']:
+            raise SystemExit('Falta evidencia para: ' + ', '.join(summary['missing']))
         return
     mapping = json.loads(mapping_path.read_text(encoding='utf-8'))
     for case in selected:
@@ -69,6 +90,8 @@ def main():
         if remove in [label['name'] for label in current['labels']]:
             args.extend(['--remove-label', remove])
         gh(*args)
+    if summary['missing']:
+        raise SystemExit('Falta evidencia para: ' + ', '.join(summary['missing']))
 
 
 if __name__ == '__main__':

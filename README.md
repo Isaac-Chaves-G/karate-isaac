@@ -1,13 +1,15 @@
 # Taller backend con Karate: Barista Bot y Climatización
 
-Proyecto individual de Isaac Chaves. Una sola entrega integra la guía técnica y el taller: **22 escenarios y 44 ejecuciones**, incluidos los ejemplos de los `Scenario Outline`.
+Proyecto individual de Isaac Chaves. Una sola entrega integra la guía técnica y el taller: **22 escenarios y 43 ejecuciones**, incluidos los ejemplos de los `Scenario Outline`.
 
 - Bloque 1: Barista Bot, 8 transiciones válidas y 22 inválidas (todas las celdas de 5 estados × 6 eventos).
-- Bloque 2: Climatización, las 8 combinaciones de 3 condiciones y 6 entradas malformadas adicionales.
+- Bloque 2: Climatización, las 8 combinaciones de 3 condiciones y 5 estructuras de entrada malformadas adicionales.
 - Requisitos y cobertura: [DISEÑO.md](docs/DISEÑO.md).
 - Casos e issues: [TRAZABILIDAD.md](docs/TRAZABILIDAD.md).
 - Resultados verificados: [RESULTADOS.md](docs/RESULTADOS.md).
 - Explicación para la sustentación: [SUSTENTACION.md](docs/SUSTENTACION.md).
+
+La revisión del 16 de octubre retiró de TC22 un ejemplo que exigía HTTP 400 para texto sin una especificación que lo respaldara. Las reglas funcionales mantienen cobertura completa. El ejemplo y su respuesta histórica quedan documentados como [observación exploratoria pendiente de especificación](docs/DEFECTOS.md); no se contabiliza como una prueba ahora aprobada.
 
 ## Ejecución local
 
@@ -39,7 +41,9 @@ La URL está centralizada en `karate-config.js`. Para otra instancia compatible:
 5. Descarga `karate-reports-N` en **Artifacts**, extrae el ZIP y abre el `karate-summary.html` dentro de `target/karate-reports`.
 6. Para repetir, retira `ejecutar-prueba` y vuelve a añadirla.
 
-Alternativa de la guía: **Actions → Karate API → Run workflow → testTag**, escribir `@GH-N` usando el número real del issue. También admite `TC01`, `barista`, `climatizacion`, `smoketest`, con o sin `@`. Vacío ejecuta todos.
+Alternativa de la guía: **Actions → Karate API → Run workflow → testTag**, escribir `@GH-N` usando el número real del issue. También admite `TC01`, `barista`, `climatizacion`, `smoketest`, con o sin `@`, sin distinguir mayúsculas y minúsculas: `@tc13` se resuelve a `@TC13`. Vacío o `todos` ejecuta todos. Los tags inexistentes y las expresiones inválidas se rechazan antes de ejecutar pruebas.
+
+El workflow **Verificar filtro y TC13** reproduce la selección `@tc13` que antes se rechazaba: llama al mismo workflow de pruebas, por lo que verifica tanto el filtro como las cinco transiciones negativas de TC13. Los escenarios negativos deben **pasar** cuando la API rechaza correctamente el evento.
 
 `Publicar casos Karate` crea/reutiliza 22 issues, añade `@GH-N` a los escenarios y guarda el mapa. Al finalizar correctamente, dispara la suite con la trazabilidad actualizada. No inventa números ni usa tokens personales guardados en archivos.
 

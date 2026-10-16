@@ -63,7 +63,9 @@ Orden del payload `valores`: temperatura >26°C (T), presencia humana (P), puert
 | TC20 | V | V | F | Refrigeración | CLI-02 |
 | TC21 | V | V | V | Apagar y emitir alerta | CLI-01 |
 
-CLI-01 tiene prioridad absoluta. Las ocho combinaciones cubren cuatro reglas simplificadas (índices 0–3). TC22/CLI-05 agrega validación del contrato: campo ausente, lista vacía, dos valores, cuatro valores, null y elemento no booleano; se espera HTTP 400.
+CLI-01 tiene prioridad absoluta. Las ocho combinaciones cubren cuatro reglas simplificadas (índices 0–3). TC22/CLI-05 agrega cinco comprobaciones de rechazo estructural observado: campo ausente, lista vacía, dos valores, cuatro valores y null; se espera HTTP 400. Estas comprobaciones adicionales no se atribuyen al enunciado funcional de la profesora.
+
+La revisión del 16 de octubre retiró únicamente el ejemplo `[true, "si", false]`. La expectativa de HTTP 400 para un elemento de otro tipo no tenía una especificación independiente: los materiales describen reglas sobre condiciones booleanas, y la página pública solo envía valores de casillas de selección. Eso no define la política de errores para texto. Se conserva la reproducción histórica como observación exploratoria en [DEFECTOS.md](DEFECTOS.md). No se sustituyó la aserción por 200 ni se agregó un `ignore`; se corrigió el alcance de la regresión, de 44 a **43 ejecuciones**. La cobertura funcional permanece en 30/30 pares estado/evento y 8/8 combinaciones.
 
 ## Ambigüedades y límites resueltos
 
@@ -72,7 +74,7 @@ CLI-01 tiene prioridad absoluta. Las ocho combinaciones cubren cuatro reglas sim
 3. **Errores de negocio y HTTP:** en Barista, 200 no significa transición válida. Se exige `valida` y el estado apropiado. La API marca las transiciones rechazadas con `noDefinida: true`.
 4. **Acciones de Barista:** el contrato devuelve `accion: null` en las cuatro transiciones del ciclo; para error y recuperación expone Interrumpir flujo/Restaurar servicio. Las acciones se validan explícitamente.
 5. **Umbrales numéricos:** Climatización solo acepta las tres condiciones booleanas ya evaluadas; no se simulan pruebas de 26°C ni 3 minutos como si la API recibiera esos números.
-6. **Entradas malformadas:** CLI-05 es un requisito técnico adicional derivado del contrato observado, separado de las cuatro reglas funcionales originales.
+6. **Entradas malformadas:** CLI-05 identifica comprobaciones adicionales del rechazo estructural observado, separadas de las cuatro reglas funcionales originales. No se interpreta una observación como especificación de todos los tipos de entrada.
 7. **Estado compartido:** no se afirma aislamiento entre distintos usuarios de la API; se serializan nuestras pruebas y se documenta la limitación.
 
-No se omiten casos negativos, ni se cambia una expectativa para conseguir una suite verde.
+Los casos negativos de las reglas de negocio se conservan completos. La reducción documentada de un ejemplo responde a una expectativa sin fuente, no a cambiar el resultado esperado para copiar una respuesta de la API.

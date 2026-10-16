@@ -39,6 +39,14 @@ def generate():
         body += f"Archivo: `{case['feature']}`.\n\n"
         body += '## Precondiciones y resultado esperado\n\n'
         body += 'Barista se reinicia y alcanza su estado inicial mediante `barista-state.feature`; no depende del caso anterior. Climatización recibe tres booleanos: temperatura alta, presencia y apertura prolongada.\n\n'
+        if case['id'] == 'TC22':
+            body += ('**Alcance revisado el 16 de octubre de 2026:** cinco estructuras inválidas: '
+                     'campo ausente, lista vacía, dos valores, cuatro valores y null. '
+                     'Son comprobaciones adicionales del rechazo estructural observado, separadas de las reglas funcionales de la profesora. '
+                     'Se retiró el ejemplo `[true, "si", false]`: exigir HTTP 400 para ese tipo '
+                     'carecía de una especificación independiente. Su respuesta 200/noDefinida se conserva como '
+                     'observación exploratoria pendiente de especificación en `docs/DEFECTOS.md`, no como bug confirmado. '
+                     'No se cambió la expectativa de ese ejemplo a 200 ni se lo marcó como omitido.\n\n')
         body += f"```gherkin\n{case['kind']}: {case['title']}\n{case['steps']}\n```\n\n"
         body += f"## Ejecución\n\nAñade la etiqueta **ejecutar-prueba** a este issue, o abre Actions → Karate API → Run workflow y escribe `{tag}`. Para repetir desde el issue, quita la etiqueta y vuelve a añadirla.\n\n"
         body += f"Local: `./gradlew clean test '-Dkarate.options=--tags {tag}'`.\n\n"

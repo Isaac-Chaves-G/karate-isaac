@@ -1,0 +1,129 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 116733681700,
+      "run_id": 38826057871,
+      "workflow_name": "Karate · @tc13",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Isaac-Chaves-G/karate-isaac/actions/runs/38826057871",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVLg1mM8AAAAbLd6gJA",
+      "head_sha": "2b0e7b1ae12151bbc8c8c0ccec61a316ef7d75ec",
+      "url": "https://api.github.com/repos/Isaac-Chaves-G/karate-isaac/actions/jobs/116733681700",
+      "html_url": "https://github.com/Isaac-Chaves-G/karate-isaac/actions/runs/38826057871/job/116733681700",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-15T23:51:26Z",
+      "started_at": "2026-10-15T23:51:28Z",
+      "completed_at": "2026-10-15T23:52:25Z",
+      "name": "pruebas",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-15T23:51:29Z",
+          "completed_at": "2026-10-15T23:51:32Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-15T23:51:32Z",
+          "completed_at": "2026-10-15T23:51:33Z"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-15T23:51:33Z",
+          "completed_at": "2026-10-15T23:51:34Z"
+        },
+        {
+          "name": "Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-15T23:51:34Z",
+          "completed_at": "2026-10-15T23:51:43Z"
+        },
+        {
+          "name": "Resolver y validar tag",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5,
+          "started_at": "2026-10-15T23:51:43Z",
+          "completed_at": "2026-10-15T23:51:43Z"
+        },
+        {
+          "name": "Ejecutar Karate",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6,
+          "started_at": "2026-10-15T23:51:43Z",
+          "completed_at": "2026-10-15T23:51:43Z"
+        },
+        {
+          "name": "Resumir resultados y actualizar issues",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7,
+          "started_at": "2026-10-15T23:51:43Z",
+          "completed_at": "2026-10-15T23:51:43Z"
+        },
+        {
+          "name": "Conservar reportes aun si hay fallos",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-15T23:51:43Z",
+          "completed_at": "2026-10-15T23:51:43Z"
+        },
+        {
+          "name": "Post Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-15T23:51:43Z",
+          "completed_at": "2026-10-15T23:52:19Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-15T23:52:19Z",
+          "completed_at": "2026-10-15T23:52:19Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-15T23:52:19Z",
+          "completed_at": "2026-10-15T23:52:20Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-10-15T23:52:20Z",
+          "completed_at": "2026-10-15T23:52:20Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Isaac-Chaves-G/karate-isaac/check-runs/116733681700",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000085,
+      "runner_name": "GitHub Actions 1000000085",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

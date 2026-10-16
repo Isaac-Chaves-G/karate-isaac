@@ -29,7 +29,7 @@ El payload `[true, true, true]` representa temperatura alta, personas y apertura
 - **Prueba negativa:** pasa cuando el sistema rechaza correctamente algo inválido. No equivale a prueba fallida.
 - **Estado vs decisión:** Barista depende del estado anterior; Climatización decide a partir de tres entradas de la petición.
 - **Cobertura:** Barista 5×6=30 pares, 8 válidos+22 inválidos; Climatización 2³=8 combinaciones, aunque solo hay cuatro acciones/reglas simplificadas.
-- **44 ejecuciones vs 22 issues:** cada outline es un caso con múltiples datos. El issue agrupa todos sus ejemplos.
+- **43 ejecuciones vs 22 issues:** cada outline es un caso con múltiples datos. El issue agrupa todos sus ejemplos. Antes eran 44 ejecuciones: se retiró de TC22 una expectativa de HTTP 400 para texto sin una especificación que la justificara; su evidencia queda como observación exploratoria.
 - **Karate vs Serenity:** Karate ya implementa HTTP y aserciones; no necesita Step Definitions, Actor, Tasks ni navegador.
 
 ## Demostración en clase

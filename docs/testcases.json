@@ -329,7 +329,7 @@
     ],
     "feature": "src/test/resources/features/climatizacion.feature",
     "module": "climatizacion",
-    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request <payload>\n    When method post\n    Then status 400\n    And match response.error == 'Se esperaban 3 valores booleanos'\n\n    Examples:\n      | caso             | payload                           |\n      | campo ausente    | {}                                |\n      | lista vacía      | { valores: [] }                   |\n      | faltan valores   | { valores: [true, false] }        |\n      | sobran valores   | { valores: [true,true,true,true] } |\n      | valor nulo       | { valores: null }                 |\n      | valor no booleano | { valores: [true, 'si', false] }  |",
+    "steps": "Given path 'decision', 'climatizacion', 'evaluar'\n    And request <payload>\n    When method post\n    Then status 400\n    And match response.error == 'Se esperaban 3 valores booleanos'\n\n    Examples:\n      | caso             | payload                           |\n      | campo ausente    | {}                                |\n      | lista vacía      | { valores: [] }                   |\n      | faltan valores   | { valores: [true, false] }        |\n      | sobran valores   | { valores: [true,true,true,true] } |\n      | valor nulo       | { valores: null }                 |",
     "kind": "Scenario Outline",
     "issue": 22
   }

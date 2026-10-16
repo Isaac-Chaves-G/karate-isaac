@@ -1,0 +1,117 @@
+{
+  "cases": {
+    "TC01": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC02": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC03": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC04": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC05": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC06": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC07": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC08": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC09": {
+      "passed": 5,
+      "failed": 0,
+      "errors": []
+    },
+    "TC10": {
+      "passed": 4,
+      "failed": 0,
+      "errors": []
+    },
+    "TC11": {
+      "passed": 4,
+      "failed": 0,
+      "errors": []
+    },
+    "TC12": {
+      "passed": 4,
+      "failed": 0,
+      "errors": []
+    },
+    "TC13": {
+      "passed": 5,
+      "failed": 0,
+      "errors": []
+    },
+    "TC14": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC15": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC16": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC17": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC18": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC19": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC20": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC21": {
+      "passed": 1,
+      "failed": 0,
+      "errors": []
+    },
+    "TC22": {
+      "passed": 5,
+      "failed": 0,
+      "errors": []
+    }
+  },
+  "passed": 43,
+  "failed": 0,
+  "missing": []
+}
