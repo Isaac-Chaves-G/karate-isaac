@@ -6,6 +6,8 @@ La [ejecución completa corregida](https://github.com/Isaac-Chaves-G/karate-isaa
 
 La evidencia pública de pasos, anotaciones y etiquetas se conserva en `evidencias/auditoria-2026-10-16/final/ci-suite.json`. El artefacto de esa ejecución contiene el reporte HTML completo.
 
+La [regresión del filtro `@tc13` en GitHub](https://github.com/Isaac-Chaves-G/karate-isaac/actions/runs/38935871908), commit `87fa436`, también terminó **SUCCESS**: **5 correctas, 0 fallidas y 0 casos sin evidencia**. El mismo workflow reutilizable normalizó el input a `@TC13`, ejecutó Karate y publicó el reporte. Evidencia: `evidencias/auditoria-2026-10-16/final/ci-TC13.json`.
+
 ## Resultado final local del 16 de octubre de 2026
 
 Después de corregir el filtro y retirar la expectativa sin especificación, `gradlew.bat clean test --console=plain` terminó **BUILD SUCCESSFUL**. Se ejecutaron **43 pruebas, 43 correctas y 0 fallidas**, agrupadas en 22 casos; no faltó evidencia de ningún caso.
