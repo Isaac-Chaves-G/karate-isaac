@@ -1,5 +1,11 @@
 # Resultados de ejecución
 
+## Versión corregida verificada en GitHub Actions
+
+La [ejecución completa corregida](https://github.com/Isaac-Chaves-G/karate-isaac/actions/runs/38935129710), commit `971025c`, terminó **SUCCESS**: **43 correctas, 0 fallidas y 0 casos sin evidencia**. Pasaron la ejecución Karate, la actualización de issues y la conservación del reporte. Los 22 issues tienen `automated-passed`; TC22 contiene sus cinco ejemplos y la explicación de la revisión de alcance.
+
+La evidencia pública de pasos, anotaciones y etiquetas se conserva en `evidencias/auditoria-2026-10-16/final/ci-suite.json`. El artefacto de esa ejecución contiene el reporte HTML completo.
+
 ## Resultado final local del 16 de octubre de 2026
 
 Después de corregir el filtro y retirar la expectativa sin especificación, `gradlew.bat clean test --console=plain` terminó **BUILD SUCCESSFUL**. Se ejecutaron **43 pruebas, 43 correctas y 0 fallidas**, agrupadas en 22 casos; no faltó evidencia de ningún caso.

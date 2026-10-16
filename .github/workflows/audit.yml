@@ -1,0 +1,19 @@
+name: Verificar filtro y TC13
+run-name: Auditoría Karate · @tc13
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/audit.yml'
+      - 'scripts/select_tag.py'
+      - 'scripts/test_select_tag.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  verificar-caso-reportado:
+    uses: ./.github/workflows/ci.yml
+    with:
+      testTag: '@tc13'
